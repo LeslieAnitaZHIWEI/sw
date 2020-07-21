@@ -1,0 +1,74 @@
+教练端初始化连接,服务端返回
+{
+    "msg": "教练端初始化直播间",
+    "code": 0,
+    "data": {
+        "liveInfo": {
+            "roomId": "2333",
+            "token": "qwertyuiopasdfghjklzxcvbnm",
+            "uid": "qwertyuiop",
+            "appId": "110110110"
+        },
+        "commandType": "STATUS",
+        "targetType": "ONE",
+        "source": "0",
+        "target": "userId@qwertyuiop",
+        "status": "LIVE_OPEN"
+    }
+}
+
+教练端上课,向服务端发送
+{
+    "commandType": "STATUS",
+    "targetType": "ALL",
+    "source": "qwertyuiop",
+    "status": "LIVE_OPEN"
+}
+教练端下课,向服务端发送
+{
+    "commandType": "STATUS",
+    "targetType": "ALL",
+    "source": "qwertyuiop",
+    "status": "LIVE_OFF"
+}
+教练端让uid: asdfghjkl 上墙,向服务端发送
+{
+    "device": {
+        "name": "MICROPHONE",
+        "state": "OFF"
+    },
+    "commandType": "DEVICE",
+    "targetType": "ALL",
+    "source": "qwertyuiop"
+}
+和
+{
+    "device": {
+        "name": "MICROPHONE",
+        "state": "ON"
+    },
+    "commandType": "DEVICE",
+    "targetType": "ALL",
+    "source": "qwertyuiop",
+    "target": "uid@asdfghjkl"
+}
+教练端让uid: asdfghjkl 上墙后禁麦,向服务端发送
+{
+    "device": {
+        "name": "MICROPHONE",
+        "state": "OFF"
+    },
+    "commandType": "DEVICE",
+    "targetType": "ALL",
+    "source": "qwertyuiop",
+    "target": "uid@asdfghjkl"
+}
+教练端把 uid: asdfghjkl 踢出房间,向服务端发送
+{
+
+    "commandType": "STATUS",
+    "targetType": "ONE",
+    "source": "0",
+    "target": "uid@asdfghjkl",
+    "status": "BAN_USER"
+}

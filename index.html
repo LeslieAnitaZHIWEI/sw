@@ -1,0 +1,242 @@
+<html lang="en">
+
+<head>
+	<title>嗨动体育</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./iconfont.css">
+</head>
+
+<body>
+	<div class="container-fluid p-0">
+		<div id="main-container">
+			<div id="buttons-container" class="row  justify-content-center ButtonRow mt-3">
+				<div class="HiDongButton">
+					<button id="video-btn" type="button" class="btn btn-block btn-dark btn-lg">
+						<i id="video-icon" class="fas fa-video"></i>
+					</button>
+				</div>
+				<div class="HiDongButton">
+					<button id="exit-btn" type="button" class="btn btn-block btn-danger btn-lg">
+						<i id="exit-icon" class="fas fa-phone-slash"></i>
+					</button>
+				</div>
+				<div class="HiDongButton">
+
+					<ul class="collapsible card agora-secondary-border"
+						style="padding:0;border:none; background-color:transparent; ">
+						<div>
+							<div class="collapsible-cog agora-secondary-bg">
+								<button id="exit-btn" type="button" class="btn btn-block editbtn btn-dark btn-lg">
+									<i id="exit-icon" class="fas fa-cog"></i>
+								</button>
+
+							</div>
+							<div class="collapsible-body card-content">
+								<div class="row">
+									<div class="col s12">
+										<div style="display: none;">
+											<label for="UID" class="active">UID</label>
+											<input type="number" placeholder="UID" name="uid">
+										</div>
+									</div>
+								</div>
+							</div>
+
+					</ul>
+
+				</div>
+				<div class="HiDongButton">
+					<button id="refrsh-btn" style="" type="button" class="btn btn-block  btn-dark btn-lg">
+						<span class="iconfont icon-shuaxin" style="line-height: 19px;font-size: 19px;"></span>
+					</button>
+				</div>
+			</div>
+
+			<div id="full-screen-video"></div>
+			<div id="lower-video-bar" class="row fixed-bottom mb-1">
+				<div id="remote-streams-container" class="container col-9 ml-1">
+					<div id="remote-streams" class="row">
+						<!-- insert remote streams dynamically -->
+					</div>
+				</div>
+				<div id="local-stream-container" class="col p-0">
+					<div id="mute-overlay" class="col">
+						<i id="mic-icon" class="fas fa-microphone-slash"></i>
+					</div>
+					<div id="no-local-video" class="col text-center">
+						<i id="user-icon" class="fas fa-user"></i>
+					</div>
+					<div id="local-video" class="col p-0"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="modalForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">嗨动课堂</h4>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-3">
+					<div class="md-form mb-4">
+						<label for="form-channel">口令</label>
+						<input type="text" id="form-channel" class="form-control">
+					</div>
+					<div class="md-form mb-4">
+						<label for="form-channel">昵称</label>
+						<input type="text" id="form-nick" class="form-control">
+					</div>
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+					<button id="join-channel" class="btn btn-default">进入</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalSetting">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="form">
+
+					<div class="modal-header text-center">
+						<h4 class="modal-title w-100 font-weight-bold">设置</h4>
+						<button type="button" class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body mx-3">
+						<div class="md-form mb-4">
+							<label for="cameraId" style="margin-bottom: 0;" class="active">摄像头 :</label>
+							<select name="cameraId" id="cameraId"></select>
+						</div>
+
+					</div>
+					<div class="modal-body mx-3">
+						<div class="md-form mb-4">
+							<label for="microphoneId" style="margin-bottom: 0; " class="active">麦克风 :</label>
+							<select name="microphoneId" id="microphoneId"></select>
+						</div>
+
+					</div>
+
+					<div class="modal-footer d-flex justify-content-center">
+						<input type="button" id="edit-setting" class="btn btn-default" value="修改"></input>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+<link rel="stylesheet" href="css/all.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<script src="js/RTCSDK.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/roomInfo.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/setting.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/agora-interface.js"></script>
+<script type="text/javascript">
+	$("#video-btn").prop("disabled", true);
+	$("#screen-share-btn").prop("disabled", true);
+	$("#exit-btn").prop("disabled", true);
+	$(document).ready(function () {
+		$("#modalForm").modal("show");
+	});
+
+	ROOMInfo.appId = "4cc73d89fd3d480bb7bc418b8832a1c1";
+	ROOMInfo.token = "0064cc73d89fd3d480bb7bc418b8832a1c1IABAW2Ku6HiGDb+76EW6A2lfFcE6esuCm4db1n1cbKPrO+YFRjkAAAAAEABzZqLAc4cEXwEAAQArhwRf";
+	
+	goFlag=false;
+
+	$("#join-channel").click(function (event) {
+		if(!$.cookie("uid")||$.cookie("uid")==""){
+		    ROOMInfo.uid = guid();//cookie中不存在
+		}else{
+			ROOMInfo.uid = $.cookie("uid");
+		}
+		$("#modalForm").modal("hide");
+		ROOMInfo.roomId = $("#form-channel").val();
+		$.ajax({
+			type: "POST",
+			contentType: "application/json;charset=UTF-8",
+			url: interfaceUrl + "/hs/group/getCustomerLiveInfo",
+			data: JSON.stringify({ roomId: ROOMInfo.roomId, uid: ROOMInfo.uid, uname: $("#form-nick").val() }),
+			success: function (result) {
+				console.log(result);
+				ROOMInfo.appId = result.data.appId;
+				ROOMInfo.roomId = result.data.roomId;
+				ROOMInfo.token = result.data.token;
+				ROOMInfo.uid = result.data.uid;
+				ROOMInfo.status = result.data.status;
+				if (ROOMInfo.status) {
+					initClientAndJoinChannel(ROOMInfo.appId, ROOMInfo.roomId);
+					goFlag=true;
+				}else{
+					alert("直播未开始，请稍后再试！");
+					goFlag=false;
+					$("#modalForm").modal("show");
+				}
+			},
+			error: function (e) {
+				console.log(e.status);
+				console.log(e.responseText);
+				$("#modalForm").modal("show");
+				alert(e.responseJSON.msg);
+			}
+		});
+
+	});
+
+
+	$(function () {
+		getData();
+		setInterval(function () {
+			getData();
+		}, 1000);
+	});
+
+
+	function getData() {
+		if(goFlag){
+			$.ajax({
+				type: "POST",
+				contentType: "application/json;charset=UTF-8",
+				url: interfaceUrl + "/hs/group/syncStatus",
+				data: JSON.stringify({ roomId: ROOMInfo.roomId, uid: ROOMInfo.uid, uname: $("form-nick").val() }),
+				success: function (result) {
+					console.log(result);
+					if (!result.data.roomStatus || !result.data.userStatus) {
+						//直播关闭或被踢出
+						try {
+							leaveChannel();
+						} catch (error) {
+
+						}
+						goFlag=false;
+						
+					}
+					if(localStreams&&localStreams.camera.stream){
+					    result.data.microphone ? localStreams.camera.stream.muteAudio() : localStreams.camera.stream.unmuteAudio();
+					}
+				},
+				error: function (e) {
+					console.log(e.status);
+					console.log(e.responseText);
+				}
+			});
+		}
+	} 
+</script>
+
+
+</html>

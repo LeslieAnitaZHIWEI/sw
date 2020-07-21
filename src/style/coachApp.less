@@ -1,0 +1,63 @@
+.miniVideos{
+
+  display: flex;
+  flex-wrap: wrap;
+  :global(.mini-view) {
+
+    position: relative;
+    width: 33.3%;
+    height: 180px;
+
+    margin: 0 5px 5px 0;
+
+    background:#000;
+  }
+
+  :global(.operation){
+    position: absolute;
+    top:10px;
+    right:10px;
+
+    z-index: 100;
+
+    button{
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+
+  :global(.userAvatar){
+    position: absolute;
+
+    bottom:10px;
+    left:10px;
+
+    z-index: 110;
+
+    img{
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+    }
+
+    :global(.name){
+      margin-left: 5px;
+      font-size: 12px;
+      color:#fff;
+      text-shadow: 2px 0px 5px rgba(0, 0, 0, .5)
+    }
+  }
+
+}
+
+
+.wh100{
+  width: 100%;
+  height: 100%;
+}
+
+.mainScreenOperation{
+  position: absolute;
+  top:10px;
+  left:10px;
+}

@@ -1,0 +1,62 @@
+.loginWraper{
+  width: 100%;
+  height: 100vh;
+
+  text-align: center;
+
+  background: #42006d url(../../assets/login-bg.jpg) no-repeat;
+  background-size: 100% 100%;
+
+  color:#fff;
+
+  h1,
+  h2{
+    font-size: 24px;
+
+  color:#fff;
+
+  }
+}
+
+
+
+.logo{
+  padding-top: 50px;
+  margin-bottom: 20px;
+  img{
+    width: 120px;
+    height: 120px;
+
+  }
+}
+
+.loginForm{
+  padding-top: 10px;
+  margin: 0 50px;
+
+  :global(.am-input-item){
+    border-radius: 50px;
+    margin-bottom: 10px;
+
+    input{
+      text-align: center;
+    }
+
+    /** 要分开写 */
+    input::-ms-input-placeholder{text-align: center;}
+    input::-webkit-input-placeholder{text-align: center;}
+  }
+
+  :global(.am-button){
+    border-radius: 50px;
+    border:none;
+
+    background: #1BC2B1;
+    color:#fff;
+
+    &::before{
+      display: none;
+    }
+
+  }
+}
